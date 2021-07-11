@@ -4,7 +4,14 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "mocha 'test/**/async.app.spec.js' --timeout 50000"
+    "test1": "mocha 'test/**/async.app.spec.js' --timeout 50000",
+    "test2": "mocha 'test/**/async.app.spec.js' -g 'async'",
+    "test3": "mocha --reporter mochawesome --reporter-options reportDir=Report,reportFilename=Test_Report",
+    "test4": "mocha './test/chai_spec.js' --watch",
+    "cmdline1": "mocha 'test/**/async.app.spec.js' -b",
+    "cmdline2": "mocha 'test/**/async.app.spec.js' -R 'progress'",
+    "cmdline3": "mocha 'test/**/async.app.spec.js' -R 'dot'",
+    "cmdline4": "mocha --parallel"
   },
   "keywords": [],
   "author": "",
@@ -12,6 +19,7 @@
   "dependencies": {
     "axios": "^0.21.1",
     "chai": "^4.3.4",
-    "mocha": "^9.0.2"
+    "mocha": "^9.0.2",
+    "mochawesome": "^6.2.2"
   }
 }

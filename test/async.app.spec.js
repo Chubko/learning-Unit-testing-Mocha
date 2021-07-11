@@ -24,7 +24,7 @@ describe('async test case', function () {
 
     it('async await based way',  async () => {
         const res = await axios.get('https://reqres.in/api/users/2');
-        expect(res.data.data.email).to.be.equal('janet.weaver@reqres.in');
+        expect(res.data.data.email).to.be.equal('janet.weaver@reqres.inr');
     });
 })
 
