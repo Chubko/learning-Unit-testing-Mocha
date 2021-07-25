@@ -2,9 +2,9 @@ const expect = require('chai').expect;
 const should = require('chai').should();
 _ = require('lodash');
 
-const  { getPerson, Person, Armor, Weapon } = require('../src/3');
+const  { getPerson, Person, Armor, Weapon, getRandomNumber, rollDice, getNotARandomNumber, attack } = require('../src');
 
-describe('#3 initial conditions', () => {
+describe('#index initial conditions', () => {
     it('initial person is an object', () => {
         const person = getPerson();
         _.isObject(person).should.be.true;
@@ -58,5 +58,48 @@ describe('#Person', () => {
         it("personB's armorBonus is 0",  () => {
             personB.armorBonus.should.equal(0);
         });
-    })
-})
+        it("if I add boomstick to my equipment, it's in the equipment array", () => {
+            const boomStick = new Weapon('Boom Stick', 0,1,12);
+            personA.addEquipment(boomStick);
+            personA.equipment.should.include(boomStick);
+        });
+        it("if I add hotpants to PersonA, he becomes awessauce...and has an armorBonus of 3", () => {
+            const hotPants = new Armor('Hawt Pawwnts', 1);
+            personA.addEquipment(hotPants);
+            personA.armorBonus.should.equal(3);
+        });
+    });
+});
+
+describe("#getRandomNumber", () => {
+    it('should return a finite number',  () => {
+        const result = getRandomNumber();
+        _.isFinite(result).should.be.true;
+    });
+});
+
+describe("#rollDice", () => {
+    it('should return a finite number',  () => {
+        const result = rollDice(1, 20);
+        _.isFinite(result).should.be.true;
+    });
+    it('should not be a random number if we use 1',  () => {
+        const result = rollDice(1, 20, getNotARandomNumber);
+        result.should.equal(20);
+    });
+});
+
+describe("#getNotARandomNumber", () => {
+    it('should return 1',  () => {
+        const result = getNotARandomNumber();
+        result.should.equal(1);
+    });
+});
+
+describe("#attack", () => {
+    it('should always be a hit if 20 is rolled',  () => {
+        const rollDice = () => 20;
+        const result = attack(rollDice, getNotARandomNumber, 0,0,0);
+        result.hit.should.true;
+    });
+});
