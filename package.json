@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "mocha 'test/**/index.test.js'",
+    "test5": "mocha 'test/**/async.app.spec.js'",
     "test1": "mocha 'test/**/async.app.spec.js' --timeout 50000",
     "test2": "mocha 'test/**/async.app.spec.js' -g 'async'",
     "test3": "mocha --reporter mochawesome --reporter-options reportDir=Report,reportFilename=Test_Report",
@@ -22,6 +23,7 @@
   "dependencies": {
     "axios": "^0.21.1",
     "chai": "^4.3.4",
+    "chai-as-promised": "^7.1.1",
     "lodash": "^4.17.21",
     "mocha": "^9.0.2",
     "mochawesome": "^6.2.2"
