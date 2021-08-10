@@ -1,5 +1,4 @@
-const { assert, expect } = require("chai");
-const should = require('chai').should();
+const { assert } = require("chai");
 const sinon = require("sinon");
 const { CoffeeShop } = require("../src/coffeeShop");
 
@@ -25,7 +24,11 @@ describe('#CoffeeShop', () => {
 
             assert.equal(coffeeShop.beans, 1);
         });
+        it('should not decrease number of beans', () => {
+            coffeeShop.buyBeans(1);
 
+            assert.notEqual(coffeeShop.beans, 0);
+        });
     });
 
     describe('#makeOneCup', () => {
@@ -62,6 +65,26 @@ describe('#CoffeeShop', () => {
         });
         it('should return AMERICANO by default', () => {
             assert.equal(coffeeShop.orderCoffee(), 'AMERICANO')
+        });
+    });
+
+    describe('#getDiscount', () => {
+        it('should be called once with passed args', () => {
+            coffeeShop.getDiscount = sinon.stub().returns(Promise.resolve('123'));
+
+            return coffeeShop.getDiscount('123')
+                .then(() => {
+                    assert.isTrue(coffeeShop.getDiscount.calledOnce);
+                    assert.equal(coffeeShop.getDiscount.args[0][0], '123');
+                });
+        });
+        it('should return true if card number is found', () => {
+            coffeeShop.getDiscount = sinon.stub().returns(Promise.resolve(true));
+
+            return coffeeShop.getDiscount('123')
+                .then((res) => {
+                    assert.equal(res, true);
+                });
         });
     });
 });
